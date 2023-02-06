@@ -16,11 +16,17 @@ class Node
   def remove
     # optional but useful, connects previous link to next link
     # and removes self from list.
+    self.prev.next = self.next 
+    self.next.prev = self.prev 
   end
 end
 
 class LinkedList
   def initialize
+    first
+    last
+    first.next = last
+    last.prev = first 
   end
 
   def [](i)
@@ -29,9 +35,13 @@ class LinkedList
   end
 
   def first
+    head = Node.new
+    #head.next = last 
   end
 
   def last
+    tail = Node.new
+   #tail.prev = first 
   end
 
   def empty?
