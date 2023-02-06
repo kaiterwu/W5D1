@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -44,6 +46,8 @@ include Enumerable
   end
 
   def empty?
+    puts @head
+    puts @tail
     @head.next == @tail && @tail.prev == @head
   end
 
@@ -58,6 +62,7 @@ include Enumerable
   end
 
   def update(key, val)
+
   end
 
   def remove(key)
@@ -70,4 +75,6 @@ include Enumerable
   # def to_s
   #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
   # end
+
+
 end
