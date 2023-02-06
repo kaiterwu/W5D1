@@ -74,13 +74,25 @@ class ResizingIntSet < IntSet
     @count = 0
   end
 
-  def insert(num)
+  def insert(*nums)
+    nums.each do |num|
+      unless self.include?(num)
+        self[num] << num 
+        @count += 1
+        self.resize! if @count == num_buckets
+      end
+    end
   end
 
   def remove(num)
+    if self[num].include?(num)
+      self[num].delete(num)
+      @count -= 1 
+    end
   end
 
   def include?(num)
+    self[num].include?(num)
   end
 
   private
@@ -96,7 +108,8 @@ class ResizingIntSet < IntSet
   def resize!
     original_size = num_buckets
     flat_store = my_flatten(@store)
-    if num_buckets < flat_store.length 
+
+    if num_buckets <= flat_store.length 
       new_arr = Array.new(original_size*2){Array.new}
       flat_store.each{|ele|new_arr[ele%new_arr.length] << ele}
       @store = new_arr 
