@@ -9,6 +9,7 @@ class HashMap
   end
 
   def include?(key)
+    bucket(key).include?(key) # maybe not work??
   end
 
   def set(key, val)
@@ -45,5 +46,6 @@ class HashMap
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`
+    @store[key.hash % num_buckets] # maybe not work??
   end
 end

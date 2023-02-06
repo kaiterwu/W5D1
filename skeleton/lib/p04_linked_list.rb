@@ -91,7 +91,12 @@ include Enumerable
 
   end
 
-  def each
+  def each(&prc)
+    current_node = first
+    until current_node == @tail
+      prc.call(current_node)
+      current_node = current_node.next
+    end
   end
 
   # uncomment when you have `each` working and `Enumerable` included
