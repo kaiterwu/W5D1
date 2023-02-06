@@ -43,18 +43,22 @@ class IntSet
   end
 
   def insert(num)
+    self[num] << num
   end
 
   def remove(num)
+    self[num].delete(num) if self[num].include?(num)
   end
 
   def include?(num)
+    self[num].include?(num)
   end
 
   private
 
   def [](num)
     # optional but useful; return the bucket corresponding to `num`
+    @store[num % num_buckets]
   end
 
   def num_buckets
@@ -62,7 +66,7 @@ class IntSet
   end
 end
 
-class ResizingIntSet
+class ResizingIntSet < IntSet
   attr_reader :count
 
   def initialize(num_buckets = 20)
@@ -73,22 +77,23 @@ class ResizingIntSet
   def insert(num)
   end
 
-  def remove(num)
-  end
+  # def remove(num)
+  # end
 
-  def include?(num)
-  end
+  # def include?(num)
+  # end
 
   private
 
-  def [](num)
-    # optional but useful; return the bucket corresponding to `num`
-  end
+  # def [](num)
+  #   # optional but useful; return the bucket corresponding to `num`
+  # end
 
-  def num_buckets
-    @store.length
-  end
+  # def num_buckets
+  #   @store.length
+  # end
 
   def resize!
+    
   end
 end
