@@ -38,34 +38,57 @@ include Enumerable
   end
 
   def first
-    self[0]
+   @head.next
   end
 
   def last
-    tail = Node.new
+    @tail.prev 
   end
 
   def empty?
-    puts @head
-    puts @tail
     @head.next == @tail && @tail.prev == @head
   end
 
   def get(key)
+    current_node = @head 
+    until current_node == @tail 
+     return current_node.val if current_node.key == key 
+     current_node = current_node.next
+    end     
   end
 
   def include?(key)
+    current_node = @head 
+    until current_node == @tail 
+     return true if current_node.key == key 
+     current_node = current_node.next
+    end 
+    false 
   end
 
   def append(key, val)
-
+    new_node = Node.new(key,val)
+    old_last_node = @tail.prev 
+    old_last_node.next = new_node 
+    @tail.prev = new_node 
+    new_node.next,new_node.prev = @tail,old_last_node 
   end
 
   def update(key, val)
-
+    current_node = @head 
+    until current_node == @tail 
+     current_node.val = val if current_node.key == key 
+     current_node = current_node.next
+    end     
   end
 
   def remove(key)
+    current_node = @head 
+    until current_node == @tail 
+     current_node.remove if current_node.key == key 
+     current_node = current_node.next
+    end     
+
   end
 
   def each
